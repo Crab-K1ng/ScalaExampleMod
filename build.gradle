@@ -1,0 +1,44 @@
+plugins {
+    id "java"
+    id "cr_puzzle_gradle"
+    id "com.github.johnrengelman.shadow"
+}
+
+puzzle_loader {
+    accessManipulatorPath = file("src/main/resources/example_mod.manipulator")
+}
+
+repositories {
+    mavenCentral()
+}
+
+// You can also use runClient task located in Tasks/puzzle/runClient
+tasks.register("runLoader", JavaExec) {
+    group = "loader"
+
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "com.github.puzzle.loader.launch.Piece"
+}
+
+dependencies {
+}
+
+processResources {
+    // Locations of where to inject the properties
+    def resourceTargets = [ "puzzle.mod.json" ]
+
+    // Left item is the name in the target, right is the varuable name
+    def replaceProperties = [
+            "mod_version"     : version,
+            "mod_desc"       : desc,
+            "mod_name"        : project.name,
+            "mod_id"          : id,
+    ]
+
+
+    inputs.properties replaceProperties
+    replaceProperties.put "project", project
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+}
