@@ -14,12 +14,16 @@ import finalforeach.cosmicreach.world.Zone
 import org.example.exmod.Constants
 
 
-class ExampleBlockEntity(zone: Zone, x: Int, y: Int, z: Int) extends ExtendedBlockEntity(zone, x, y, z), IRenderable, ITickable{
-  private val id = new Identifier(Constants.MOD_ID, "example_entity")
+
+object ExampleBlockEntity {
+  val id = new Identifier(Constants.MOD_ID, "example_entity")
 
   def register() = {
     BlockEntityCreator.registerBlockEntityCreator(id.toString, (block, zone, x, y, z) => new ExampleBlockEntity(zone, x, y, z))
   }
+}
+class ExampleBlockEntity(zone: Zone, x: Int, y: Int, z: Int) extends ExtendedBlockEntity(zone, x, y, z), IRenderable, ITickable{
+ 
 
   override def onRender(camera: Camera): Unit = {}
 
@@ -32,5 +36,5 @@ class ExampleBlockEntity(zone: Zone, x: Int, y: Int, z: Int) extends ExtendedBlo
     }
   }
 
-  override def getBlockEntityId: String = id.toString
+  override def getBlockEntityId: String = ExampleBlockEntity.id.toString
 }

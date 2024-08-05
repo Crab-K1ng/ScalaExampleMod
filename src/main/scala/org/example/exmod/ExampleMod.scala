@@ -7,6 +7,7 @@ import com.github.puzzle.core.resources.ResourceLocation
 import com.github.puzzle.game.block.DataModBlock
 import com.github.puzzle.loader.entrypoint.interfaces.ModInitializer
 import com.github.puzzle.game.events.{OnPreLoadAssetsEvent, OnRegisterBlockEvent}
+import org.example.block_enities.ExampleBlockEntity.ExampleBlockEntity
 import org.example.blocks.Bedrock
 import org.greenrobot.eventbus.Subscribe
 
@@ -17,6 +18,7 @@ class ExampleMod extends ModInitializer{
   override def onInit(): Unit = {
     PuzzleRegistries.EVENT_BUS.register(this)
 
+    ExampleBlockEntity.register()
   }
 
   @Subscribe
