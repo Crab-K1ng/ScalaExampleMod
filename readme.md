@@ -7,6 +7,7 @@ For testing in the dev env, you can use the `gradle runClient` task
 For building, the usual `gradle buildBundleJar` task can be used. The output will be in the `build/libs/` folder
 
 ## Notes
+- any Access widener/transformer/manipulator will probably break!
 - Most project properties can be changed in the `gradle.properties`
 - To change author, description and stuff that is not there, edit `src/main/resources/puzzle.mod.json`
 - The project name is defined in `settings.gradle`
