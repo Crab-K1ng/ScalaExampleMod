@@ -1,15 +1,19 @@
 package org.example.exmod
 
-import com.github.puzzle.core.PuzzleRegistries
+import com.github.puzzle.core.{Identifier, PuzzleRegistries}
 import com.github.puzzle.core.localization.{ILanguageFile, LanguageManager}
 import com.github.puzzle.core.localization.files.LanguageFileVersion1
 import com.github.puzzle.core.resources.ResourceLocation
 import com.github.puzzle.game.block.DataModBlock
 import com.github.puzzle.loader.entrypoint.interfaces.ModInitializer
 import com.github.puzzle.game.events.{OnPreLoadAssetsEvent, OnRegisterBlockEvent}
-import org.example.block_enities.ExampleBlockEntity.ExampleBlockEntity
 import org.example.blocks.Bedrock
 import org.greenrobot.eventbus.Subscribe
+import com.github.puzzle.game.items.IModItem
+import com.github.puzzle.game.items.impl.{BasicItem, BasicTool}
+import org.example.block_enities.ExampleBlockEntityRegistrar
+import org.example.commands.Commands
+import org.example.item.ExamplePickaxe
 
 import java.io.IOException
 
@@ -18,7 +22,13 @@ class ExampleMod extends ModInitializer{
   override def onInit(): Unit = {
     PuzzleRegistries.EVENT_BUS.register(this)
 
-    ExampleBlockEntity.register()
+    ExampleBlockEntityRegistrar.register()
+
+    Commands.register()
+
+    IModItem.registerItem(new ExamplePickaxe());
+    IModItem.registerItem(new BasicItem(Identifier.of(Constants.MOD_ID, "example_item")));
+    IModItem.registerItem(new BasicTool(Identifier.of(Constants.MOD_ID, "stone_sword")));
   }
 
   @Subscribe
