@@ -13,12 +13,9 @@ class ExamplePickaxe extends IModItem {
 
     var tagManifest: DataTagManifest = new DataTagManifest()
     var id: Identifier = new Identifier(Constants.MOD_ID,"example_pickaxe");
-    
-    
-    {
-        tagManifest.addTag(IModItem.TEXTURE_LOCATION_PRESET.createTag(new ResourceLocation(Constants.MOD_ID, "textures/items/example_pickaxe.png")));
-        tagManifest.addTag(IModItem.MODEL_ID_PRESET.createTag(IModItem.MODEL_2_5D_ITEM))
 
+    {
+        addTexture(IModItem.MODEL_2_5D_ITEM, new ResourceLocation(Constants.MOD_ID, "textures/items/example_pickaxe.png"))
     }
 
     override def isTool = true
@@ -33,4 +30,6 @@ class ExamplePickaxe extends IModItem {
     override def getTagManifest: DataTagManifest = tagManifest
 
     override def isCatalogHidden = false
+
+    override def toString: String = id.toString
 }
