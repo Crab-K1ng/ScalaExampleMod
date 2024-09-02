@@ -18,8 +18,8 @@
     "example.mixins.json"
   ],
   "dependencies": {
-    "cosmic-reach": ">=0.1.44",
-    "puzzle-loader": ">=1.1.0",
+    "cosmic-reach": ">=0.1.50",
+    "puzzle-loader": ">=1.5.2",
     "puzzle-language-scala": ">=1.0.1"
   },
   "accessManipulator": "example_mod.manipulator"

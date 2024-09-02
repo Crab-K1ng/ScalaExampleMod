@@ -13,17 +13,19 @@ import finalforeach.cosmicreach.items.Item
 import finalforeach.cosmicreach.items.ItemSlot
 import finalforeach.cosmicreach.ui.UI
 import finalforeach.cosmicreach.world.Zone
+import org.example.block_enities.ExampleBlockEntityRegistrar
 import org.example.exmod.Constants
+
 import java.util
+import scala.jdk.CollectionConverters.*
 
-import scala.jdk.CollectionConverters._
-
-class Bedrock extends IModBlock{
+class Bedrock extends IModBlock {
   val BLOCK_ID = new Identifier(Constants.MOD_ID, "bedrock")
   val BLOCK_NAME = "bedrock"
 
   val ALL_TEXTURE = new ResourceLocation("base", "textures/blocks/lunar_soil.png")
 
+  override def getIdentifier: Identifier = BLOCK_ID
 
   override def onBreak(zone: Zone, player: Player, blockState: BlockState, position: BlockPosition): Unit = {
     val slot = UI.hotbar.getSelectedSlot
@@ -39,10 +41,10 @@ class Bedrock extends IModBlock{
     // make the block unbreakable, by omitting the super call here
   }
 
-  def getBlockGenerator: BlockGenerator = {
+  override def getBlockGenerator: BlockGenerator = {
     val generator = new BlockGenerator(BLOCK_ID, BLOCK_NAME)
     generator.createBlockState("default", "model", true, "events", true)
-    generator.addBlockEntity(Constants.MOD_ID + ":example_entity",util.Map.of())
+    generator.addBlockEntity(ExampleBlockEntityRegistrar.id.toString, util.Map.of())
     generator
   }
 
