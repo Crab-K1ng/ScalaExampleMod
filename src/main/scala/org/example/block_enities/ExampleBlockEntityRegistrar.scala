@@ -1,21 +1,18 @@
 package org.example.block_enities
 
 import com.badlogic.gdx.graphics.Camera
-import com.github.puzzle.core.Identifier
-import com.github.puzzle.game.blockentities.{IRenderable}
 import com.github.puzzle.game.util.BlockUtil
 import finalforeach.cosmicreach.blockentities.{BlockEntity, BlockEntityCreator}
 import finalforeach.cosmicreach.blocks.{Block, BlockState}
+import finalforeach.cosmicreach.util.Identifier
 import finalforeach.cosmicreach.world.Zone
 import org.example.exmod.Constants
 
 object ExampleBlockEntityRegistrar {
-  val id = new Identifier(Constants.MOD_ID, "example_entity")
+  val id = Identifier.of(Constants.MOD_ID, "example_entity")
 
 
-  class ExampleBlockEntity(zone: Zone, x: Int, y: Int, z: Int) extends BlockEntity(zone, x, y, z), IRenderable {
-
-    override def onRender(camera: Camera): Unit = {}
+  class ExampleBlockEntity(zone: Zone, x: Int, y: Int, z: Int) extends BlockEntity(zone, x, y, z) {
 
     override def onCreate(blockState: BlockState): Unit = {
       setTicking(true)
@@ -23,8 +20,8 @@ object ExampleBlockEntityRegistrar {
     }
 
     override def onRemove(): Unit = {
-      setTicking(false)
       super.onRemove()
+      setTicking(false)
     }
 
     override def onTick(): Unit = {

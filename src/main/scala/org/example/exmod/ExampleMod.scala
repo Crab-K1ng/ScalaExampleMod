@@ -1,9 +1,9 @@
 package org.example.exmod
 
-import com.github.puzzle.core.{Identifier, PuzzleRegistries}
+import com.github.puzzle.core.PuzzleRegistries
 import com.github.puzzle.core.localization.{ILanguageFile, LanguageManager}
 import com.github.puzzle.core.localization.files.LanguageFileVersion1
-import com.github.puzzle.core.resources.ResourceLocation
+import com.github.puzzle.core.resources.PuzzleGameAssetLoader
 import com.github.puzzle.game.block.DataModBlock
 import com.github.puzzle.loader.entrypoint.interfaces.ModInitializer
 import com.github.puzzle.game.events.{OnPreLoadAssetsEvent, OnRegisterBlockEvent, OnRegisterZoneGenerators}
@@ -11,6 +11,7 @@ import org.example.blocks.Bedrock
 import org.greenrobot.eventbus.Subscribe
 import com.github.puzzle.game.items.IModItem
 import com.github.puzzle.game.items.impl.{BasicItem, BasicTool}
+import finalforeach.cosmicreach.util.Identifier
 import org.example.block_enities.ExampleBlockEntityRegistrar
 import org.example.commands.Commands
 import org.example.item.{ExampleCyclingItem, ExamplePickaxe}
@@ -35,7 +36,7 @@ class ExampleMod extends ModInitializer{
 
   @Subscribe
   def onEvent(event: OnRegisterBlockEvent): Unit = {
-    event.registerBlock(() => new DataModBlock("diamond_block", new ResourceLocation(Constants.MOD_ID, "blocks/diamond_block.json")))
+    event.registerBlock(() => new DataModBlock(Identifier.of(Constants.MOD_ID, "diamond_block.json")))
     event.registerBlock(() => new Bedrock())
   }
 
@@ -49,7 +50,7 @@ class ExampleMod extends ModInitializer{
   @Subscribe
   def onEvent(event: OnPreLoadAssetsEvent): Unit = {
     var lang: ILanguageFile= null
-    try lang = LanguageFileVersion1.loadLanguageFromString(ResourceLocation(Constants.MOD_ID, "languages/en-US.json").locate.readString)
+    try lang = LanguageFileVersion1.loadLanguageFile(PuzzleGameAssetLoader.locateAsset(Identifier.of(Constants.MOD_ID, "languages/en-US.json")))
     catch {
       case e : IOException => throw new RuntimeException(e)
     }

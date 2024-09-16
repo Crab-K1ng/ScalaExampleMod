@@ -1,25 +1,23 @@
 package org.example.item
 
-import com.github.puzzle.core.Identifier
-import com.github.puzzle.core.resources.ResourceLocation
 import com.github.puzzle.game.items.IModItem
 import com.github.puzzle.game.items.data.DataTagManifest
 import finalforeach.cosmicreach.blocks.BlockState
 import finalforeach.cosmicreach.items.ItemStack
+import finalforeach.cosmicreach.util.Identifier
 import org.example.exmod.Constants
 
 class ExamplePickaxe extends IModItem {
 
-
     var tagManifest: DataTagManifest = new DataTagManifest()
-    var id: Identifier = new Identifier(Constants.MOD_ID,"example_pickaxe");
+    var id: Identifier = Identifier.of(Constants.MOD_ID,"example_pickaxe");
 
     {
-        addTexture(IModItem.MODEL_2_5D_ITEM, new ResourceLocation(Constants.MOD_ID, "textures/items/example_pickaxe.png"))
+        addTexture(IModItem.MODEL_2_5D_ITEM, Identifier.of(Constants.MOD_ID, "textures/items/example_pickaxe.png"))
     }
 
     override def isTool = true
-
+    
     override def getEffectiveBreakingSpeed(stack: ItemStack): Float = if (stack.getItem.equals(this)) 2.0f
     else 1.0f
 
@@ -32,4 +30,7 @@ class ExamplePickaxe extends IModItem {
     override def isCatalogHidden = false
 
     override def toString: String = id.toString
+
+    override def getName: String = "Example Pickaxe"
+    
 }

@@ -1,7 +1,5 @@
 package org.example.blocks
 
-import com.github.puzzle.core.Identifier
-import com.github.puzzle.core.resources.ResourceLocation
 import com.github.puzzle.game.block.IModBlock
 import com.github.puzzle.game.generators.BlockEventGenerator
 import com.github.puzzle.game.generators.BlockGenerator
@@ -12,6 +10,7 @@ import finalforeach.cosmicreach.entities.player.Player
 import finalforeach.cosmicreach.items.Item
 import finalforeach.cosmicreach.items.ItemSlot
 import finalforeach.cosmicreach.ui.UI
+import finalforeach.cosmicreach.util.Identifier
 import finalforeach.cosmicreach.world.Zone
 import org.example.block_enities.ExampleBlockEntityRegistrar
 import org.example.exmod.Constants
@@ -20,10 +19,9 @@ import java.util
 import scala.jdk.CollectionConverters.*
 
 class Bedrock extends IModBlock {
-  val BLOCK_ID = new Identifier(Constants.MOD_ID, "bedrock")
-  val BLOCK_NAME = "bedrock"
+  val BLOCK_ID = Identifier.of(Constants.MOD_ID, "bedrock")
 
-  val ALL_TEXTURE = new ResourceLocation("base", "textures/blocks/lunar_soil.png")
+  val ALL_TEXTURE = Identifier.of("base", "textures/blocks/lunar_soil.png")
 
   override def getIdentifier: Identifier = BLOCK_ID
 
@@ -42,7 +40,7 @@ class Bedrock extends IModBlock {
   }
 
   override def getBlockGenerator: BlockGenerator = {
-    val generator = new BlockGenerator(BLOCK_ID, BLOCK_NAME)
+    val generator = new BlockGenerator(BLOCK_ID)
     generator.createBlockState("default", "model", true, "events", true)
     generator.addBlockEntity(ExampleBlockEntityRegistrar.id.toString, util.Map.of())
     generator
